@@ -25,7 +25,8 @@ public class RecyclerViewFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         MainActivity mainActivity = (MainActivity) getActivity();
-        recyclerView.setAdapter(mainActivity.getAdapter(bundle.getInt("day")));
+        recyclerView.setAdapter(mainActivity.getAdapter(
+                (ViewPagerTabType) bundle.getSerializable("type")));
         return view;
     }
 

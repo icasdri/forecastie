@@ -111,18 +111,21 @@ public class MainActivity extends AppCompatActivity {
         setRecurringAlarm(this);
     }
 
-    public WeatherRecyclerAdapter getAdapter(int id){
-        WeatherRecyclerAdapter weatherRecyclerAdapter;
-        if(id == 0) {
-            weatherRecyclerAdapter = new WeatherRecyclerAdapter(this, longTermTodayWeather);
+    public WeatherRecyclerAdapter getAdapter(ViewPagerTabType type){
+        List<Weather> weatherItemList;
+        switch(type) {
+            case TODAY_LONGTERM:
+                weatherItemList = longTermTodayWeather;
+                break;
+            case TOMORROW_LONGTERM:
+                weatherItemList = longTermTomorrowWeather;
+                break;
+            case LATER_LONGTERM:
+            default:
+                weatherItemList = longTermWeather;
+                break;
         }
-        else if (id == 1) {
-            weatherRecyclerAdapter = new WeatherRecyclerAdapter(this, longTermTomorrowWeather);
-        }
-        else {
-            weatherRecyclerAdapter = new WeatherRecyclerAdapter(this, longTermWeather);
-        }
-        return  weatherRecyclerAdapter;
+        return new WeatherRecyclerAdapter(this, weatherItemList, type);
     }
 
     @Override
@@ -403,23 +406,13 @@ public class MainActivity extends AppCompatActivity {
         }
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        Bundle bundleToday = new Bundle();
-        bundleToday.putInt("day", 0);
-        RecyclerViewFragment recyclerViewFragmentToday = new RecyclerViewFragment();
-        recyclerViewFragmentToday.setArguments(bundleToday);
-        viewPagerAdapter.addFragment(recyclerViewFragmentToday, getString(R.string.today));
-
-        Bundle bundleTomorrow = new Bundle();
-        bundleTomorrow.putInt("day", 1);
-        RecyclerViewFragment recyclerViewFragmentTomorrow = new RecyclerViewFragment();
-        recyclerViewFragmentTomorrow.setArguments(bundleTomorrow);
-        viewPagerAdapter.addFragment(recyclerViewFragmentTomorrow, getString(R.string.tomorrow));
-
-        Bundle bundle = new Bundle();
-        bundle.putInt("day", 2);
-        RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
-        recyclerViewFragment.setArguments(bundle);
-        viewPagerAdapter.addFragment(recyclerViewFragment, getString(R.string.later));
+        for(ViewPagerTabType type : ViewPagerTabType.values()) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("type", type);
+            RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
+            recyclerViewFragment.setArguments(bundle);
+            viewPagerAdapter.addFragment(recyclerViewFragment, type.getTitle(this.getResources()));
+        }
 
         viewPagerAdapter.notifyDataSetChanged();
         viewPager.setAdapter(viewPagerAdapter);

@@ -24,12 +24,14 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class WeatherRecyclerAdapter extends RecyclerView.Adapter<WeatherViewHolder> {
-    private List<Weather> itemList;
     private Context context;
+    private List<Weather> itemList;
+    private ViewPagerTabType type;
 
-    public WeatherRecyclerAdapter(Context context, List<Weather> itemList) {
-        this.itemList = itemList;
+    public WeatherRecyclerAdapter(Context context, List<Weather> itemList, ViewPagerTabType type) {
         this.context = context;
+        this.itemList = itemList;
+        this.type = type;
     }
 
     @Override

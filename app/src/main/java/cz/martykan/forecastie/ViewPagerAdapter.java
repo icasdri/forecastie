@@ -1,5 +1,6 @@
 package cz.martykan.forecastie;
 
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -33,5 +34,21 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return fragmentTitleList.get(position);
+    }
+}
+
+enum ViewPagerTabType {
+    TODAY_LONGTERM(R.string.today),
+    TOMORROW_LONGTERM(R.string.tomorrow),
+    LATER_LONGTERM(R.string.later);
+
+    private int titleRef;
+
+    ViewPagerTabType(int titleRef) {
+        this.titleRef = titleRef;
+    }
+
+    public String getTitle(Resources r) {
+        return r.getString(titleRef);
     }
 }

@@ -3,4 +3,10 @@
     <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#455a64</color>
     <color name="colorAccent">#455a64</color>
+    <color name="colorTintedBackground">#cfd8dc</color>
+
+    <color name="darkTheme_colorPrimary">#37474f</color>
+    <color name="darkTheme_colorPrimaryDark">#263238</color>
+    <color name="darkTheme_colorAccent">@android:color/white</color>
+    <color name="darkTheme_colorTintedBackground">@android:color/black</color>
 </resources>

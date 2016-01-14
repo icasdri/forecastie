@@ -44,6 +44,12 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="laterDiffDayTints"
+            android:title="Differentiate Days by Color"
+            android:summary="Differentiate days with different background tints in the Later tab" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="darkTheme"
             android:title="@string/setting_darkTheme" />
     </PreferenceCategory>
